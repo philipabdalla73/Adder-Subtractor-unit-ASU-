@@ -1,0 +1,17 @@
+LIBRARY ieee ;
+USE ieee.std_logic_1164.all ;
+USE ieee.std_logic_unsigned.all ;
+ENTITY ASU IS
+PORT ( Cin : IN STD_LOGIC ;
+X, Y : IN STD_LOGIC_VECTOR(15 DOWNTO 0) ;
+S : OUT STD_LOGIC_VECTOR(15 DOWNTO 0) ;
+Cout, Overflow : OUT STD_LOGIC ) ;
+END ASU ;
+ARCHITECTURE Behavior OF ASU IS
+SIGNAL Sum : STD_LOGIC_VECTOR(16 DOWNTO 0) ;
+BEGIN
+Sum <= (’0’ & X) + (’0’ & Y) + Cin ;
+S <= Sum(15 DOWNTO 0) ;
+Cout <= Sum(16) ;
+Overflow <= Sum(16) XOR X(15) XOR Y(15) XOR Sum(15);
+END Behavior ;
